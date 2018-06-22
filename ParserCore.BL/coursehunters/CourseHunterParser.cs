@@ -20,10 +20,14 @@ namespace ParserCore.BL.coursehunters
                 var videoUrl = element.Children.FirstOrDefault(item =>
                     item.HasAttribute("itemprop") && item.Attributes["itemprop"].Value == "contentUrl");
 
+                var fileName = element.Children.FirstOrDefault(item =>
+                    item.HasAttribute("itemprop") && item.Attributes["itemprop"].Value == "name");
+
                 var data = new ParsData()
                 {
                     ImageUrl = imageUrl.GetAttribute("href"),
-                    WideoUrl = videoUrl.GetAttribute("href")
+                    WideoUrl = videoUrl.GetAttribute("href"),
+                    FileName = fileName.InnerHtml
                 };
                 list.Add(data);
             }

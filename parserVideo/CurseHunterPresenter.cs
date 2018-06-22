@@ -3,6 +3,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FileManager.BL;
@@ -114,6 +115,8 @@ namespace parserVideo
 
                 Debug.WriteLine($"{parsData.ImageUrl}");
                 Debug.WriteLine($"{parsData.WideoUrl}");
+                Debug.WriteLine($"{parsData.FileName}");
+
 
                 _viev.SetPanel(item);
                 tempCount += 1;
@@ -130,7 +133,7 @@ namespace parserVideo
             Debug.WriteLine(data.WideoUrl);
 
 
-            string currentUrl = getCurrentUrl(filePatch, data.WideoUrl);
+            string currentUrl = getCurrentUrl(filePatch, data.FileName, data.WideoUrl);
 
             Debug.WriteLine($"filePatch{filePatch}");
             Debug.WriteLine($"selectedFolder{_selectedFolder}");
@@ -165,7 +168,7 @@ namespace parserVideo
             }
         }
 
-        private string getCurrentUrl(string filePatch, string wideoUrl)
+        private string getCurrentUrl(string filePatch, string fileName, string wideoUrl)
         {
             if (_selectedFolder == null && filePatch == null)
             {
@@ -174,8 +177,9 @@ namespace parserVideo
 
             if (_selectedFolder != null)
             {
-                String[] slplitList = wideoUrl.Split(new char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
-                return ($"{_selectedFolder}/{slplitList.Last()}");
+//              String[] slplitList = wideoUrl.Split(new char[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
+//                return ($"{_selectedFolder}/{fileName}{Path.GetExtension(wideoUrl)}");
+                return Path.Combine(_selectedFolder,fileName+Path.GetExtension(wideoUrl));
             }
 
             return filePatch;

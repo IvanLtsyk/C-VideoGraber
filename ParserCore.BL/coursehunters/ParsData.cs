@@ -10,10 +10,12 @@ namespace ParserCore.BL
     {
         string ImageUrl { get; set; }
         string WideoUrl { get; set; }
+        string FileName { get; set; }
     }
     public class ParsData: IParsData
     {
         public string ImageUrl { get; set; }
         public string WideoUrl { get; set; }
+        public string FileName { get; set; }
     }
 }
