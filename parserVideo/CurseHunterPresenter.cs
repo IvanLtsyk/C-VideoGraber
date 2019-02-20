@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FileManager.BL;
 using ParserCore.BL;
+using parserVideo.Primitives;
 
 namespace parserVideo
 {
@@ -128,12 +129,12 @@ namespace parserVideo
 
         private void Item_StartLoadClick(object sender, string filePatch)
         {
-            MainGrupBox item = (MainGrupBox) sender;
-            ParsData data = (ParsData) item.Tag;
+            MainGrupBox item = (MainGrupBox)sender;
+            ParsData data = (ParsData)item.Tag;
             Debug.WriteLine(data.WideoUrl);
 
-
-            string currentUrl = getCurrentUrl(filePatch, data.FileName, data.WideoUrl);
+            var fileName = Slug.OnlySeparatorFfriendly(data.FileName);
+            string currentUrl = getCurrentUrl(filePatch, fileName, data.WideoUrl);
 
             Debug.WriteLine($"filePatch{filePatch}");
             Debug.WriteLine($"selectedFolder{_selectedFolder}");
@@ -148,7 +149,7 @@ namespace parserVideo
             }
 
             var mFilleManager = new MainFileManager();
-            
+
             var a = new EventHandler((s, e) =>
             {
                 item.CurrentProgressBarPerceent = mFilleManager.Progres;
@@ -177,9 +178,9 @@ namespace parserVideo
 
             if (_selectedFolder != null)
             {
-//              String[] slplitList = wideoUrl.Split(new char[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
-//                return ($"{_selectedFolder}/{fileName}{Path.GetExtension(wideoUrl)}");
-                return Path.Combine(_selectedFolder,fileName+Path.GetExtension(wideoUrl));
+                //              String[] slplitList = wideoUrl.Split(new char[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
+                //                return ($"{_selectedFolder}/{fileName}{Path.GetExtension(wideoUrl)}");
+                return Path.Combine(_selectedFolder, fileName + Path.GetExtension(wideoUrl));
             }
 
             return filePatch;

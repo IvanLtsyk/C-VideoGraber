@@ -50,6 +50,8 @@
     <Compile Include="HTMLLoader.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="ParserWorker.cs" />
+    <Compile Include="Primitives\SanitizedString.cs" />
+    <Compile Include="Primitives\Slug.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
