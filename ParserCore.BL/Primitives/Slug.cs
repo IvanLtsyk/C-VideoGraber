@@ -86,8 +86,8 @@ namespace parserVideo.Primitives
             {
                 c = title[i];
 
-                if (c == '"' || c == ' ' || c == ',' || c == '.' || c == '/' ||
-                         c == '\\' || c == '-' || c == '_' || c == '=')
+                if (c == '"' || c == '?' || c == ',' || c == '.' || c == '/' ||
+                         c == '\\' || c == '-'|| c == '=')
                 {
                     if (!prevdash && sb.Length > 0)
                     {

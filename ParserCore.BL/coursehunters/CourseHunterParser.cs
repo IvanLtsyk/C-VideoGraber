@@ -11,14 +11,15 @@ namespace ParserCore.BL.coursehunters
         {
             var list = new List<ParsData>();
             var items = document.QuerySelectorAll("li").Where(item =>
-                item.ClassName != null && item.ClassName.Contains("lessons-list__li"));
+                item.ClassName != null && item.ClassName.Contains("lessons-item"));
+            int i = 1;
             foreach (var element in items)
             {
                 var imageUrl = element.Children.FirstOrDefault(item =>
-                    item.HasAttribute("itemprop") && item.Attributes["itemprop"].Value == "thumbnailUrl");
+                    item.HasAttribute("itemprop") && item.Attributes["itemprop"].Value == "thumbnail");
 
                 var videoUrl = element.Children.FirstOrDefault(item =>
-                    item.HasAttribute("itemprop") && item.Attributes["itemprop"].Value == "contentUrl");
+                    item.HasAttribute("itemprop") && item.Attributes["itemprop"].Value == "url");
 
                 var fileName = element.Children.FirstOrDefault(item =>
                     item.HasAttribute("itemprop") && item.Attributes["itemprop"].Value == "name");
@@ -27,9 +28,10 @@ namespace ParserCore.BL.coursehunters
                 {
                     ImageUrl = imageUrl.GetAttribute("href"),
                     WideoUrl = videoUrl.GetAttribute("href"),
-                    FileName = fileName.InnerHtml
+                    FileName = $"{i}_{fileName.InnerHtml.Trim()}"
                 };
                 list.Add(data);
+                ++i;
             }
 
             return list.ToArray();
